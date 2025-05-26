@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "text-extractor"
+version = "0.1.0"
+description = "A robust, extensible Python package for synchronous and asynchronous text extraction from PDF, DOCX, DOC, TXT, ZIP, MD, RTF, HTML, and more."
+authors = [
+    { name="Your Name", email="your.email@example.com" }
+]
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "mypy>=1.0.0"
+]
+pdf = ["pymupdf"]
+docx = ["python-docx"]
+doc = ["antiword"]
+md = ["markdown"]
+rtf = ["striprtf"]
+html = ["beautifulsoup4", "lxml"]
+csv = []
+json = []
+xml = ["lxml"]
+all = [
+    "pymupdf",
+    "python-docx",
+    "antiword",
+    "markdown",
+    "striprtf",
+    "beautifulsoup4",
+    "lxml"
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["textxtract*"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q"
+testpaths = [
+    "textxtract/tests"
+]

@@ -1,0 +1,94 @@
+site_name: Text Extractor
+site_description: Professional, extensible Python package for text extraction from multiple file types.
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: "blue"
+      accent: "deep-orange"
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - scheme: slate
+      primary: "indigo"
+      accent: "deep-orange"
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+  features:
+    - navigation.pagination
+    - navigation.goto_top
+    - navigation.path
+    - navigation.top
+    - search-suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+nav:
+  - Home: index.md
+  - Architecture: architecture.md
+  - Installation: installation.md
+  - Usage: usage.md
+  - Testing: testing.md
+  - API Reference: 
+    - Overview: reference/index.md
+    - Core: reference/core/index.md
+    - Handlers: reference/handlers/index.md
+    - Sync Extractor: reference/sync/extractor.md
+    - Async Extractor: reference/aio/extractor.md
+  - Contributing: contributing.md
+  - Changelog: changelog.md
+  
+repo_url: https://github.com/10xScale-in/text-extractor
+repo_name: 10xScale-in/text-extractor
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+
+plugins:
+  - search
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          options:
+            docstring_style: google
+            show_signature: true
+            show_source: true
+            allow_inspection: true
+            show_bases: true
+            parameter_headings: true
+            group_by_category: true
+            show_category_heading: true
+            show_symbol_type_heading: true
+            summary: true
+            inherited_members: true
+            show_submodules: true
+            show_if_no_docstring: true
+            separate_signature: true
+            extra:
+              load_external_modules: true
+              show_inheritance: true
+              show_toc: true
+              show_typehints: true
+              show_inheritance_diagram: true
+
+  - gen-files:
+      scripts:
+        - scripts/generate_docs.py
