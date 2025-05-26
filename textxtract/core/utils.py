@@ -1,12 +1,29 @@
 """Utility functions for textxtract package."""
 
 import tempfile
+from dataclasses import dataclass
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Union
 
 # Security limits
 DEFAULT_MAX_FILE_SIZE = 100 * 1024 * 1024  # 100MB
 DEFAULT_MAX_TEMP_FILES = 1000
+
+
+@dataclass
+class FileInfo:
+    """File information data class."""
+
+    filename: str
+    size_bytes: int
+    size_mb: float
+    extension: str
+    is_temp: bool = False
+
+    @property
+    def size_kb(self) -> float:
+        """File size in KB."""
+        return round(self.size_bytes / 1024, 2)
 
 
 def validate_file_size(file_bytes: bytes, max_size: Optional[int] = None) -> None:
@@ -28,19 +45,19 @@ def validate_filename(filename: str) -> None:
 
     # Check for null bytes
     if "\x00" in filename:
-        raise ValueError(f"Invalid filename: contains null byte")
+        raise ValueError("Invalid filename: contains null byte")
 
     # Check for path traversal attempts
     if ".." in filename:
-        raise ValueError(f"Invalid filename: path traversal detected")
+        raise ValueError("Invalid filename: path traversal detected")
 
     # Check for absolute paths (both Unix and Windows)
     if filename.startswith("/") or (len(filename) > 1 and filename[1] == ":"):
-        raise ValueError(f"Invalid filename: absolute path not allowed")
+        raise ValueError("Invalid filename: absolute path not allowed")
 
     # Check for Windows path separators in suspicious contexts
     if "\\" in filename and (".." in filename or filename.count("\\") > 2):
-        raise ValueError(f"Invalid filename: suspicious path structure")
+        raise ValueError("Invalid filename: suspicious path structure")
 
     # Check filename length
     if len(filename) > 255:
@@ -87,11 +104,42 @@ def validate_file_extension(filename: str, allowed_extensions: list[str]) -> boo
     return Path(filename).suffix.lower() in allowed_extensions
 
 
-def get_file_info(file_bytes: bytes, filename: str) -> dict:
-    """Get basic file information for logging and debugging."""
-    return {
-        "filename": filename,
-        "size_bytes": len(file_bytes),
-        "size_mb": round(len(file_bytes) / (1024 * 1024), 2),
-        "extension": Path(filename).suffix.lower(),
-    }
+def get_file_info(
+    source: Union[Path, str, bytes], filename: Optional[str] = None
+) -> FileInfo:
+    """
+    Get file information for logging and debugging.
+
+    Args:
+        source: File path or file bytes
+        filename: Required if source is bytes, optional for file paths
+
+    Returns:
+        FileInfo: Data class with file information
+    """
+    if isinstance(source, bytes):
+        if not filename:
+            raise ValueError("filename is required when source is bytes")
+        return FileInfo(
+            filename=filename,
+            size_bytes=len(source),
+            size_mb=round(len(source) / (1024 * 1024), 2),
+            extension=Path(filename).suffix.lower(),
+            is_temp=True,
+        )
+    else:
+        # Handle file path
+        file_path = Path(source)
+        if not file_path.exists():
+            raise FileNotFoundError(f"File not found: {file_path}")
+        if not file_path.is_file():
+            raise ValueError(f"Path is not a file: {file_path}")
+
+        file_size = file_path.stat().st_size
+        return FileInfo(
+            filename=filename or file_path.name,
+            size_bytes=file_size,
+            size_mb=round(file_size / (1024 * 1024), 2),
+            extension=file_path.suffix.lower(),
+            is_temp=False,
+        )
