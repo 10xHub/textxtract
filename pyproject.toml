@@ -3,15 +3,17 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "text-extractor"
+name = "textxtract"
 version = "0.1.0"
 description = "A robust, extensible Python package for synchronous and asynchronous text extraction from PDF, DOCX, DOC, TXT, ZIP, MD, RTF, HTML, and more."
 authors = [
-    { name="Your Name", email="your.email@example.com" }
+    { name = "10XScale", email = "opensource@10xscale.ai" },
+    { name = "Shudipto Trafder", email = "shudipto.trafder@hire10x.ai" }
 ]
 readme = "README.md"
 requires-python = ">=3.9"
 dependencies = []
+urls = { "GitHub" = "https://github.com/10XScale-in/textxtract" }
 
 [project.optional-dependencies]
 dev = [
@@ -20,7 +22,13 @@ dev = [
     "pytest-cov>=4.0.0",
     "black>=23.0.0",
     "isort>=5.12.0",
-    "mypy>=1.0.0"
+    "mypy>=1.0.0",
+    "mkdocs>=1.5.3",
+    "mkdocs-material>=9.5.18",
+    "mkdocstrings[python]>=0.24.0",
+    "mkdocs-gen-files>=0.5.0",
+    "mkdocs-literate-nav>=0.6.0",
+    "pymdown-extensions>=10.7",
 ]
 pdf = ["pymupdf"]
 docx = ["python-docx"]
@@ -28,8 +36,6 @@ doc = ["antiword"]
 md = ["markdown"]
 rtf = ["striprtf"]
 html = ["beautifulsoup4", "lxml"]
-csv = []
-json = []
 xml = ["lxml"]
 all = [
     "pymupdf",
