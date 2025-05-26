@@ -40,10 +40,10 @@ import asyncio
 extractor = AsyncTextExtractor()
 
 # Async extraction from file path
-text = await extractor.extract_async("document.pdf")
+text = await extractor.extract("document.pdf")
 
 # Or using asyncio.run for simple cases
-text = asyncio.run(extractor.extract_async("document.pdf"))
+text = asyncio.run(extractor.extract("document.pdf"))
 ```
 
 ## Extracting from Bytes
@@ -75,7 +75,7 @@ extractor = AsyncTextExtractor()
 with open("document.pdf", "rb") as f:
     file_bytes = f.read()
 
-text = await extractor.extract_async(file_bytes, "document.pdf")
+text = await extractor.extract(file_bytes, "document.pdf")
 ```
 
 ## Supported File Types
@@ -98,7 +98,7 @@ text = await extractor.extract_async(file_bytes, "document.pdf")
 
 ```python
 from textxtract import SyncTextExtractor
-from textxtract.core.config import ExtractorConfig
+from textxtract.config import ExtractorConfig
 
 # Custom configuration
 config = ExtractorConfig(
@@ -115,7 +115,7 @@ All operations raise custom exceptions from `textxtract.core.exceptions`:
 
 ```python
 from textxtract import SyncTextExtractor
-from textxtract.core.exceptions import (
+from textxtract.exceptions import (
     ExtractionError,
     InvalidFileError,
     FileTypeNotSupportedError
@@ -152,7 +152,7 @@ with SyncTextExtractor() as extractor:
 from textxtract import AsyncTextExtractor
 
 async with AsyncTextExtractor() as extractor:
-    text = await extractor.extract_async("document.pdf")
+    text = await extractor.extract("document.pdf")
 ```
 
 ## Logging
@@ -201,7 +201,7 @@ from pathlib import Path
 
 async def process_files_async(file_paths):
     async with AsyncTextExtractor() as extractor:
-        tasks = [extractor.extract_async(path) for path in file_paths]
+        tasks = [extractor.extract(path) for path in file_paths]
         results = await asyncio.gather(*tasks, return_exceptions=True)
         return results
 
@@ -238,7 +238,7 @@ async def extract_large_file():
     async with AsyncTextExtractor() as extractor:
         # For large files, async extraction is recommended
         config = {"max_file_size": 500 * 1024 * 1024}  # 500MB
-        text = await extractor.extract_async("large_document.pdf", config=config)
+        text = await extractor.extract("large_document.pdf", config=config)
         return text
 
 text = asyncio.run(extract_large_file())
