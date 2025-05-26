@@ -1004,7 +1004,7 @@
 <h2 id="configuration">Configuration</h2>
 <h3 id="extractorconfig">ExtractorConfig</h3>
 <p>Configuration class for customizing extraction behavior.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">textxtract.core.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">ExtractorConfig</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">textxtract.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">ExtractorConfig</span>
 </span></code></pre></div>
 <h4 id="constructor_2">Constructor</h4>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">ExtractorConfig</span><span class="p">(</span>
@@ -1172,7 +1172,7 @@
 from typing import Union, Optional
 from pathlib import Path
 from textxtract import SyncTextExtractor, AsyncTextExtractor
-from textxtract.core.config import ExtractorConfig
+from textxtract.core import ExtractorConfig
 from textxtract.core.exceptions import ExtractionError</p>
 
 
