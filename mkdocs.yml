@@ -1,5 +1,5 @@
 site_name: Text Extractor
-site_description: Professional, extensible Python package for text extraction from multiple file types.
+site_description: is a robust, professional Python library for extracting text from a wide range of document formats—synchronously or asynchronously—with a focus on extensibility, security, and performance.
 theme:
   name: material
   palette:
@@ -42,8 +42,8 @@ nav:
   - Contributing: contributing.md
   - Changelog: changelog.md
   
-repo_url: https://github.com/10xScale-in/text-extractor
-repo_name: 10xScale-in/text-extractor
+repo_url: https://github.com/10XScale-in/textxtract
+repo_name: 10XScale-in/textxtract
 
 markdown_extensions:
   - admonition
