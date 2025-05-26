@@ -41,7 +41,8 @@ dev = [
     "pytest-asyncio",
     "mkdocs",
     "mkdocs-material",
-    "mkdocstrings[python]"
+    "mkdocstrings[python]",
+    "pytest-cov"
 ]
 
 [tool.setuptools.packages.find]
