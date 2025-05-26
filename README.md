@@ -318,5 +318,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Built with Python and the amazing open-source ecosystem
 - Special thanks to the maintainers of underlying libraries
 
----
 
