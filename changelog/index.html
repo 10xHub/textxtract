@@ -603,11 +603,44 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#010-initial-release" class="md-nav__link">
+  <a href="#020" class="md-nav__link">
     <span class="md-ellipsis">
-      [0.1.0] - Initial Release
+      [0.2.0]
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="[0.2.0]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added" class="md-nav__link">
+    <span class="md-ellipsis">
+      Added
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changed
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fixed
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -646,11 +679,44 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#010-initial-release" class="md-nav__link">
+  <a href="#020" class="md-nav__link">
     <span class="md-ellipsis">
-      [0.1.0] - Initial Release
+      [0.2.0]
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="[0.2.0]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added" class="md-nav__link">
+    <span class="md-ellipsis">
+      Added
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changed
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fixed
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -674,17 +740,32 @@
 
 
 <h1 id="changelog">Changelog</h1>
-<p>All notable changes to this project will be documented in this file.</p>
-<h2 id="010-initial-release">[0.1.0] - Initial Release</h2>
+<p>All notable changes to the <code>textxtract</code> project are documented in this file.</p>
+<p>The format is based on <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>,
+and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
+<h2 id="020">[0.2.0]</h2>
+<h3 id="added">Added</h3>
 <ul>
-<li>Initial implementation of text-extractor package</li>
-<li>Synchronous and asynchronous extractors</li>
-<li>Modular handler system for PDF, DOCX, DOC, TXT, ZIP, MD, RTF, HTML, CSV, JSON, XML</li>
-<li>Optional dependencies for each file type</li>
-<li>Robust error handling and logging</li>
-<li>Professional documentation with Material for MkDocs</li>
-<li>Comprehensive test suite</li>
+<li>Support for both file paths and bytes input in extractors</li>
+<li>Enhanced <code>FileInfo</code> dataclass with comprehensive file metadata</li>
+<li>Context manager support for both sync and async extractors</li>
+<li>Improved logging with structured file information</li>
+<li>Thread pool optimization for async operations</li>
 </ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>Unified API: both extractors use <code>extract()</code> method name</li>
+<li>Enhanced error handling with custom exception hierarchy</li>
+<li>Improved documentation with professional styling</li>
+<li>Better test coverage for all input methods</li>
+</ul>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Memory leaks in async operations</li>
+<li>Temporary file cleanup issues</li>
+<li>Type hint improvements</li>
+</ul>
+<p>For detailed information about any release, see the <a href="../api/">API Documentation</a> and <a href="../usage/">Usage Guide</a>.</p>
 
 
 
