@@ -3,7 +3,7 @@
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![PyPI version](https://badge.fury.io/py/textxtract.svg)](https://badge.fury.io/py/textxtract)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Tests](https://github.com/your-org/textxtract/workflows/Tests/badge.svg)](https://github.com/your-org/textxtract/actions)
+[![Tests](https://github.com/10XScale-in/textxtract/workflows/Tests/badge.svg)](https://github.com/10XScale-in/textxtract/actions)
 
 A professional, extensible Python package for extracting text from multiple file formats with both synchronous and asynchronous support.
 
@@ -287,7 +287,7 @@ We welcome contributions! Please see our [Contributing Guide](docs/contributing.
 ### Quick Contribution Setup
 ```bash
 # Fork and clone the repo
-git clone https://github.com/your-username/text-extractor.git
+git clone https://github.com/10XScale-in/textxtract.git
 cd text-extractor
 
 # Set up development environment
@@ -308,9 +308,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🌟 Support
 
-- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/your-org/text-extractor/issues)
-- 💡 **Feature Requests**: [GitHub Discussions](https://github.com/your-org/text-extractor/discussions)
-- 📧 **Questions**: [GitHub Discussions](https://github.com/your-org/text-extractor/discussions)
+- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/10XScale-in/textxtract/issues)
+- 💡 **Feature Requests**: [GitHub Discussions](https://github.com/10XScale-in/textxtract/discussions)
+- 📧 **Questions**: [GitHub Discussions](https://github.com/10XScale-in/textxtract/discussions)
 
 ## 🙏 Acknowledgments`
 
