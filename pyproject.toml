@@ -13,7 +13,10 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.9"
 dependencies = []
-urls = { "GitHub" = "https://github.com/10XScale-in/textxtract" }
+
+[project.urls]
+"Homepage" = "https://github.com/10XScale-in/textxtract"
+"Documentation" = "https://10xscale-in.github.io/textxtract/"
 
 [project.optional-dependencies]
 dev = [
@@ -55,5 +58,5 @@ include = ["textxtract*"]
 minversion = "7.0"
 addopts = "-ra -q"
 testpaths = [
-    "textxtract/tests"
+    "tests"
 ]

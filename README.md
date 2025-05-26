@@ -2,6 +2,10 @@
 
 A robust, extensible Python package for synchronous and asynchronous text extraction from PDF, DOCX, DOC, TXT, ZIP, Markdown, RTF, HTML, CSV, JSON, XML, and more.
 
+## Documentation
+
+Full documentation is available at: [https://10xscale-in.github.io/textxtract/](https://10xscale-in.github.io/textxtract/)
+
 ## Features
 
 - Synchronous and asynchronous extraction APIs
@@ -15,7 +19,7 @@ A robust, extensible Python package for synchronous and asynchronous text extrac
 ## Installation
 
 ```bash
-pip install .
+pip install textxtract
 ```
 
 ## Usage Example
@@ -36,7 +40,7 @@ text = asyncio.run(async_extractor.extract_async(file_bytes, filename))
 
 ## API Reference
 
-See [`ARCHITECTURE_PLAN.md`](ARCHITECTURE_PLAN.md) for detailed architecture and module layout.
+See [`ARCHITECTURE_PLAN.md`](/docs/architecture.md) for detailed architecture and module layout.
 
 ## Running Tests
 
