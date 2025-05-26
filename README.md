@@ -18,6 +18,9 @@ A professional, extensible Python package for extracting text from multiple file
 - **🔒 Thread-Safe**: Async operations use thread pools for I/O-bound tasks
 - **🧹 Context Manager Support**: Automatic resource cleanup
 
+## Documentation
+For complete documentation, including installation instructions, usage examples, and API reference, please visit our [documentation site](https://10xscale-in.github.io/textxtract/).
+
 ## 📦 Installation
 
 ### Basic Installation
