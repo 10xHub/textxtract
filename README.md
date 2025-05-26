@@ -134,7 +134,7 @@ except ExtractionError:
 
 ```python
 from textxtract import SyncTextExtractor
-from textxtract.config import ExtractorConfig
+from textxtract import ExtractorConfig
 
 # Custom configuration
 config = ExtractorConfig(

@@ -159,7 +159,7 @@ async with AsyncTextExtractor() as extractor:
 Configuration class for customizing extraction behavior.
 
 ```python
-from textxtract.core.config import ExtractorConfig
+from textxtract.core import ExtractorConfig
 ```
 
 #### Constructor
@@ -321,5 +321,5 @@ The package is fully typed. Import types for better IDE support:
 from typing import Union, Optional
 from pathlib import Path
 from textxtract import SyncTextExtractor, AsyncTextExtractor
-from textxtract.core.config import ExtractorConfig
+from textxtract.core import ExtractorConfig
 from textxtract.core.exceptions import ExtractionError
