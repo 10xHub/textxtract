@@ -1,15 +1,11 @@
-# TextXtract
+# Text Extractor
 
-A robust, extensible Python package for synchronous and asynchronous text extraction from PDF, DOCX, DOC, TXT, ZIP, Markdown, RTF, HTML, CSV, JSON, XML, and more.
-
-## Documentation
-
-Full documentation is available at: [https://10xscale-in.github.io/textxtract/](https://10xscale-in.github.io/textxtract/)
+A robust, extensible Python package for synchronous and asynchronous text extraction from PDF, DOCX, DOC, TXT, and ZIP files.
 
 ## Features
 
 - Synchronous and asynchronous extraction APIs
-- Modular file type handlers (PDF, DOCX, DOC, TXT, ZIP, Markdown, RTF, HTML, CSV, JSON, XML, and more.)
+- Modular file type handlers (PDF, DOCX, DOC, TXT, ZIP)
 - Abstract base classes for extensibility
 - Custom exception handling and logging
 - Configurable encoding, logging, and timeouts
@@ -19,14 +15,14 @@ Full documentation is available at: [https://10xscale-in.github.io/textxtract/](
 ## Installation
 
 ```bash
-pip install textxtract
+pip install .
 ```
 
 ## Usage Example
 
 ```python
-from textxtract.sync.extractor import SyncTextExtractor
-from textxtract.aio.extractor import AsyncTextExtractor
+from text_extractor.sync.extractor import SyncTextExtractor
+from text_extractor.async_.extractor import AsyncTextExtractor
 
 # Synchronous extraction
 extractor = SyncTextExtractor()
@@ -40,7 +36,7 @@ text = asyncio.run(async_extractor.extract_async(file_bytes, filename))
 
 ## API Reference
 
-See [`ARCHITECTURE_PLAN.md`](/docs/architecture.md) for detailed architecture and module layout.
+See [`ARCHITECTURE_PLAN.md`](ARCHITECTURE_PLAN.md) for detailed architecture and module layout.
 
 ## Running Tests
 

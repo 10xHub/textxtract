@@ -85,7 +85,7 @@ class TestEdgeCases:
 
         content = b"test content"
         with pytest.raises(RuntimeError, match="Extractor has been closed"):
-            await extractor.extract_async(content, "test.txt")
+            await extractor.extract(content, "test.txt")
 
     def test_config_validation(self):
         """Test configuration validation."""
@@ -133,9 +133,7 @@ class TestEdgeCases:
             content = b"test content"
 
             # Run multiple extractions concurrently
-            tasks = [
-                extractor.extract_async(content, f"test_{i}.txt") for i in range(5)
-            ]
+            tasks = [extractor.extract(content, f"test_{i}.txt") for i in range(5)]
 
             results = await asyncio.gather(*tasks)
             assert len(results) == 5
@@ -156,7 +154,7 @@ class TestEdgeCases:
 
         async with extractor:
             content = b"test content"
-            result = await extractor.extract_async(content, "test.txt")
+            result = await extractor.extract(content, "test.txt")
             assert result == "test content"
 
         # Verify extractor is closed

@@ -2,7 +2,7 @@
 
 from abc import ABC, abstractmethod
 from pathlib import Path
-from typing import Any, Optional
+from typing import Optional
 
 
 class FileTypeHandler(ABC):
@@ -29,11 +29,4 @@ class TextExtractor(ABC):
         self, file_bytes: bytes, filename: str, config: Optional[dict] = None
     ) -> str:
         """Extract text synchronously from file bytes."""
-        pass
-
-    @abstractmethod
-    async def extract_async(
-        self, file_bytes: bytes, filename: str, config: Optional[dict] = None
-    ) -> str:
-        """Extract text asynchronously from file bytes."""
         pass

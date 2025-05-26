@@ -28,7 +28,10 @@ class SyncTextExtractor(TextExtractor):
         )
 
     def extract(
-        self, file_bytes: bytes, filename: str, config: Optional[dict] = None
+        self,
+        file_bytes: bytes,
+        filename: str,
+        config: Optional[dict] = None,
     ) -> str:
         """
         Extract text synchronously from file bytes.
@@ -106,19 +109,6 @@ class SyncTextExtractor(TextExtractor):
         finally:
             safe_unlink(temp_path)
             logger.debug("Temporary file %s deleted", temp_path)
-
-    async def extract_async(
-        self, file_bytes: bytes, filename: str, config: Optional[dict] = None
-    ) -> str:
-        """
-        Async interface for compatibility; delegates to sync extract.
-
-        Raises:
-            NotImplementedError: Always, as sync extractor does not support async.
-        """
-        raise NotImplementedError(
-            "Synchronous extractor does not support async extraction. Use AsyncTextExtractor instead."
-        )
 
     def __enter__(self):
         """Context manager entry."""

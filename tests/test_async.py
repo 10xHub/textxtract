@@ -36,7 +36,7 @@ async def test_async_extractor_all_types(filename, should_succeed):
     file_path = TEST_FILES_DIR / filename
     file_bytes = file_path.read_bytes()
     try:
-        text = await extractor.extract_async(file_bytes, filename)
+        text = await extractor.extract(file_bytes, filename)
         assert should_succeed, f"Extraction should have failed for {filename}"
         assert isinstance(text, (str, list)), "Extracted text should be str or list"
         assert text, "Extracted text should not be empty"

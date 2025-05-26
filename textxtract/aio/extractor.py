@@ -43,20 +43,7 @@ class AsyncTextExtractor(TextExtractor):
             max_workers,
         )
 
-    def extract(
-        self, file_bytes: bytes, filename: str, config: Optional[dict] = None
-    ) -> str:
-        """
-        Sync interface for compatibility; delegates to async extract.
-
-        Raises:
-            NotImplementedError: Always, as async extractor requires async usage.
-        """
-        raise NotImplementedError(
-            "Use extract_async() for asynchronous extraction or use SyncTextExtractor"
-        )
-
-    async def extract_async(
+    async def extract(
         self, file_bytes: bytes, filename: str, config: Optional[dict] = None
     ) -> str:
         """
