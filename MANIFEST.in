@@ -1,1 +1,4 @@
+exclude tests/*
+exclude scripts/*
+exclude docs/*
 include README.md LICENSE
