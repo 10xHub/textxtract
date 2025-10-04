@@ -19,7 +19,7 @@ A professional, extensible Python package for extracting text from multiple file
 - **🧹 Context Manager Support**: Automatic resource cleanup
 
 ## Documentation
-For complete documentation, including installation instructions, usage examples, and API reference, please visit our [documentation site](https://10xscale-in.github.io/textxtract/).
+For complete documentation, including installation instructions, usage examples, and API reference, please visit our [documentation site](https://10xhub.github.io/textxtract/).
 
 ## 📦 Installation
 
