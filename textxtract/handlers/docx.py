@@ -19,47 +19,107 @@ from textxtract.core.exceptions import ExtractionError
 class DOCXHandler(FileTypeHandler):
     """Enhanced handler for comprehensive text extraction from DOCX files.
     
-    Extracts text from all document elements including paragraphs, tables,
-    headers, footers, text boxes, and footnotes to ensure complete content
-    extraction for documents like resumes, reports, and complex layouts.
+    This handler provides complete text extraction from Microsoft Word documents,
+    including all document elements such as paragraphs, tables, headers, footers,
+    text boxes, and footnotes. It's designed to handle complex document layouts
+    commonly found in resumes, reports, and structured documents.
+    
+    Features:
+        - Extracts text from document body paragraphs
+        - Processes table content with cell-by-cell extraction
+        - Captures header and footer text from all sections
+        - Attempts to extract text from embedded text boxes and shapes
+        - Handles footnotes and endnotes when available
+        - Deduplicates repeated content
+        - Cleans and normalizes extracted text
+    
+    Example:
+        >>> handler = DOCXHandler()
+        >>> text = handler.extract(Path("document.docx"))
+        >>> print(text)
+        "Document title\nParagraph content...\nTable data | Column 2..."
+        
+        >>> # Async extraction
+        >>> text = await handler.extract_async(Path("document.docx"))
     """
 
     def _clean_text(self, text: str) -> str:
-        """Clean and normalize extracted text."""
+        """Clean and normalize extracted text.
+        
+        Performs various text cleaning operations to improve readability
+        and consistency of extracted content.
+        
+        Args:
+            text (str): Raw text to be cleaned.
+            
+        Returns:
+            str: Cleaned and normalized text with proper spacing and formatting.
+            
+        Note:
+            - Normalizes multiple whitespace characters to single spaces
+            - Removes excessive consecutive dots/periods
+            - Fixes spacing around punctuation marks
+            - Strips leading and trailing whitespace
+        """
         if not text:
             return ""
         
-        # Normalize whitespace
+        # Normalize whitespace (replace multiple spaces, tabs, newlines with single space)
         text = re.sub(r'\s+', ' ', text)
-        # Remove excessive dots/periods
+        # Remove excessive dots/periods (likely formatting artifacts)
         text = re.sub(r'\.{2,}', ' ', text)
-        # Clean up spacing around punctuation
+        # Clean up spacing around punctuation (remove spaces before punctuation)
         text = re.sub(r'\s+([.!?,:;])', r'\1', text)
         return text.strip()
 
     def extract(self, file_path: Path, config: Optional[dict] = None) -> str:
+        """Extract text from a DOCX file with comprehensive content capture.
+        
+        Performs thorough text extraction from all available document elements
+        including body text, tables, headers, footers, and embedded content.
+        
+        Args:
+            file_path (Path): Path to the DOCX file to extract text from.
+            config (Optional[dict], optional): Configuration options for extraction.
+                Currently not used but reserved for future enhancements.
+                
+        Returns:
+            str: Extracted and cleaned text from the document with proper formatting.
+                Returns empty string if no text is found.
+                
+        Raises:
+            ExtractionError: If the file cannot be read or processed, or if the
+                python-docx library is not available.
+                
+        Note:
+            - Text is deduplicated to avoid repeated content from overlapping elements
+            - Table content is formatted with pipe separators between columns
+            - Special content (footnotes, text boxes) is labeled with descriptive tags
+            - Sentence breaks are automatically inserted for better readability
+        """
         try:
             from docx import Document
             import re
 
+            # Load the document
             doc = Document(file_path)
             text_parts = []
-            processed_text = set()  # To avoid duplicates
+            processed_text = set()  # Track processed text to avoid duplicates
             
-            # Extract text from paragraphs
+            # Extract text from main document paragraphs
             for paragraph in doc.paragraphs:
                 text = paragraph.text.strip()
                 if text and text not in processed_text:
                     text_parts.append(text)
                     processed_text.add(text)
             
-            # Extract text from tables
+            # Extract text from all tables in the document
             for table in doc.tables:
                 table_texts = []
                 for row in table.rows:
                     row_text = []
                     for cell in row.cells:
-                        # Get text from all paragraphs in the cell
+                        # Process each paragraph within the cell
                         cell_paragraphs = []
                         for paragraph in cell.paragraphs:
                             text = paragraph.text.strip()
@@ -69,15 +129,16 @@ class DOCXHandler(FileTypeHandler):
                         if cell_paragraphs:
                             row_text.append(" ".join(cell_paragraphs))
                     if row_text:
+                        # Join cell contents with pipe separator for table structure
                         table_texts.append(" | ".join(row_text))
                 
-                # Add table content if any
+                # Add table content to main text collection
                 if table_texts:
                     text_parts.extend(table_texts)
             
-            # Extract text from headers and footers
+            # Extract text from headers and footers across all document sections
             for section in doc.sections:
-                # Header text
+                # Process header content
                 if section.header:
                     for paragraph in section.header.paragraphs:
                         text = paragraph.text.strip()
@@ -85,7 +146,7 @@ class DOCXHandler(FileTypeHandler):
                             text_parts.append(text)
                             processed_text.add(text)
                 
-                # Footer text
+                # Process footer content
                 if section.footer:
                     for paragraph in section.footer.paragraphs:
                         text = paragraph.text.strip()
@@ -93,9 +154,9 @@ class DOCXHandler(FileTypeHandler):
                             text_parts.append(text)
                             processed_text.add(text)
             
-            # Try to extract text from footnotes and endnotes
+            # Attempt to extract footnotes and endnotes (may not be available in all documents)
             try:
-                # Extract footnotes
+                # Extract footnotes if present
                 if hasattr(doc, 'footnotes'):
                     for footnote in doc.footnotes:
                         for paragraph in footnote.paragraphs:
@@ -104,7 +165,7 @@ class DOCXHandler(FileTypeHandler):
                                 text_parts.append(f"[Footnote: {text}]")
                                 processed_text.add(text)
                 
-                # Extract endnotes
+                # Extract endnotes if present
                 if hasattr(doc, 'endnotes'):
                     for endnote in doc.endnotes:
                         for paragraph in endnote.paragraphs:
@@ -113,17 +174,17 @@ class DOCXHandler(FileTypeHandler):
                                 text_parts.append(f"[Endnote: {text}]")
                                 processed_text.add(text)
             except Exception:
-                # If footnotes/endnotes extraction fails, continue
+                # Footnote/endnote extraction is optional - continue if it fails
                 pass
             
-            # Try to extract text from text boxes and shapes using xml parsing
+            # Attempt to extract text from embedded text boxes and shapes using XML parsing
             try:
                 from docx.oxml.ns import qn
                 
-                # Look for drawing elements containing text
+                # Iterate through document XML elements to find drawing content
                 for element in doc.element.body.iter():
                     if element.tag.endswith('}txbxContent'):
-                        # Extract text from text boxes
+                        # Extract text from text box elements
                         for para in element.iter():
                             if para.tag.endswith('}t') and para.text:
                                 text = para.text.strip()
@@ -131,16 +192,16 @@ class DOCXHandler(FileTypeHandler):
                                     text_parts.append(f"[TextBox: {text}]")
                                     processed_text.add(text)
             except Exception:
-                # If text box extraction fails, continue
+                # Text box extraction is optional - continue if it fails
                 pass
             
-            # Clean up and join text
+            # Process and format the final output
             if text_parts:
-                # Clean each part and join with newlines
+                # Clean each text part and filter out empty content
                 cleaned_parts = [self._clean_text(part) for part in text_parts if part.strip()]
                 result = "\n".join(cleaned_parts)
                 
-                # Ensure proper sentence breaks for readability
+                # Add proper sentence breaks for improved readability
                 result = re.sub(r'([.!?])\s*([A-Z])', r'\1\n\2', result)
                 return result.strip()
             
@@ -152,6 +213,28 @@ class DOCXHandler(FileTypeHandler):
     async def extract_async(
         self, file_path: Path, config: Optional[dict] = None
     ) -> str:
+        """Asynchronously extract text from a DOCX file.
+        
+        Provides non-blocking text extraction by running the synchronous
+        extraction method in a separate thread.
+        
+        Args:
+            file_path (Path): Path to the DOCX file to extract text from.
+            config (Optional[dict], optional): Configuration options for extraction.
+                Currently not used but reserved for future enhancements.
+                
+        Returns:
+            str: Extracted and cleaned text from the document with proper formatting.
+                Returns empty string if no text is found.
+                
+        Raises:
+            ExtractionError: If the file cannot be read or processed, or if the
+                python-docx library is not available.
+                
+        Note:
+            This method uses asyncio.to_thread() to run the synchronous extraction
+            in a thread pool, making it suitable for async/await usage patterns.
+        """
         import asyncio
 
         return await asyncio.to_thread(self.extract, file_path, config)
