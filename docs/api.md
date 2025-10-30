@@ -281,7 +281,7 @@ from textxtract.core.utils import FileInfo
 | `.docx` | `DOCXHandler` | `python-docx` |
 | `.doc` | `DOCHandler` | `antiword` |
 | `.md` | `MDHandler` | `markdown`, `beautifulsoup4` |
-| `.rtf` | `RTFHandler` | `pyrtf-ng` |
+| `.rtf` | `RTFHandler` | `striprtf` |
 | `.html`, `.htm` | `HTMLHandler` | `beautifulsoup4`, `lxml` |
 | `.csv` | `CSVHandler` | None |
 | `.json` | `JSONHandler` | None |

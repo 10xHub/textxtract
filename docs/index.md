@@ -71,7 +71,7 @@ text = asyncio.run(extract_text())
 | PDF | `.pdf` | `pip install textxtract[pdf]` | PyMuPDF |
 | Word | `.docx` | `pip install textxtract[docx]` | python-docx |
 | Word Legacy | `.doc` | `pip install textxtract[doc]` | antiword |
-| Rich Text | `.rtf` | `pip install textxtract[rtf]` | pyrtf-ng |
+| Rich Text | `.rtf` | `pip install textxtract[rtf]` | striprtf |
 | HTML | `.html`, `.htm` | `pip install textxtract[html]` | beautifulsoup4 |
 | CSV | `.csv` | Built-in | stdlib |
 | JSON | `.json` | Built-in | stdlib |

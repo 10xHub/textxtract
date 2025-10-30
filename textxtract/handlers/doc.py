@@ -42,10 +42,21 @@ class DOCHandler(FileTypeHandler):
             raise ExtractionError("antiword extraction timed out")
         except subprocess.CalledProcessError as e:
             error_msg = e.stderr.decode() if e.stderr else str(e)
+            # Check if the error is due to missing libreoffice dependency
+            if (
+                "libreoffice" in error_msg.lower()
+                or "no such file or directory" in error_msg.lower()
+            ):
+                # Trigger fallback by raising FileNotFoundError
+                raise FileNotFoundError(
+                    "antiword requires libreoffice which is not available"
+                )
             raise ExtractionError(f"antiword extraction failed: {error_msg}")
 
     def _extract_with_fallback(
-        self, file_path: Path, config: Optional[dict] = None
+        self,
+        file_path: Path,
+        config: Optional[dict] = None,
     ) -> str:
         """Fallback extraction methods when antiword is not available."""
 
