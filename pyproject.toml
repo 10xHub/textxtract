@@ -15,9 +15,9 @@ requires-python = ">=3.9"
 dependencies = []
 
 [project.urls]
-Homepage = "https://10xscale-in.github.io/textxtract/"
-Documentation = "https://10xscale-in.github.io/textxtract/"
-Source = "https://github.com/10XScale-in/textxtract"
+Homepage = "https://10xhub.github.io/textxtract/"
+Documentation = "https://10xhub.github.io/textxtract/"
+Source = "https://github.com/10xhub/textxtract"
 
 [project.optional-dependencies]
 pdf = ["pymupdf"]
@@ -40,6 +40,7 @@ dev = [
     "pytest>=7.0",
     "pytest-asyncio",
     "mkdocs",
+    "mkdocs-gen-files",
     "mkdocs-material",
     "mkdocstrings[python]",
     "pytest-cov"
@@ -50,7 +51,15 @@ where = ["."]
 
 [tool.pytest.ini_options]
 minversion = "7.0"
-addopts = "-ra -q"
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--cov=textxtract",
+    "--cov-fail-under=65",
+    "--cov-report=term-missing:skip-covered",
+    "--cov-report=html",
+    "--cov-report=xml",
+]
 testpaths = [
     "tests"
 ]
