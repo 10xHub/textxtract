@@ -5,6 +5,15 @@ All notable changes to the `textxtract` project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.3]
+
+### Added
+- Support for ZIP archives: Extract text from supported file types within ZIP files with security checks to prevent path traversal and size limits
+- Enhanced DOC file extraction with robust fallback methods: antiword primary extraction, python-docx compatibility for DOCX-like files, and binary text pattern extraction for maximum compatibility
+
+### Changed
+- Switched RTF extraction to use `striprtf` library for improved performance and reliability
+
 ## [0.2.0]
 
 ### Added
