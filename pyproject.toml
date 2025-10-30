@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "textxtract"
-version = "0.2.2"
+version = "0.2.3"
 description = "A robust, extensible Python package for synchronous and asynchronous text extraction from PDF, DOCX, DOC, TXT, ZIP, MD, RTF, HTML, and more."
 authors = [
     { name="10xScale", email="contact@hire10x.ai" },
