@@ -63,7 +63,7 @@ pip install textxtract[all]
 | `docx` | `python-docx` | `.docx` |
 | `doc` | `antiword` | `.doc` |
 | `md` | `markdown`, `beautifulsoup4` | `.md` |
-| `rtf` | `pyrtf-ng` | `.rtf` |
+| `rtf` | `striprtf` | `.rtf` |
 | `html` | `beautifulsoup4`, `lxml` | `.html`, `.htm` |
 | `xml` | `lxml` | `.xml` |
 | `all` | All of the above | All supported types |
@@ -71,7 +71,7 @@ pip install textxtract[all]
 ## 🐍 Python Version Requirements
 
 - **Python 3.9 or higher** is required
-- Tested on Python 3.9, 3.10, 3.11, and 3.12
+- Tested on Python 3.9, 3.10, 3.11, 3.12, and 3.13
 
 ## 🔄 Upgrading
 

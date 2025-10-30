@@ -3,7 +3,6 @@
 import logging
 from typing import Dict, Type, Optional, List
 from functools import lru_cache
-from pathlib import Path
 
 from textxtract.core.base import FileTypeHandler
 from textxtract.core.exceptions import FileTypeNotSupportedError
@@ -73,7 +72,7 @@ class HandlerRegistry:
 
             self._handlers[".rtf"] = RTFHandler
         except ImportError:
-            logger.debug("RTF handler not available - pyrtf-ng not installed")
+            logger.debug("RTF handler not available - striprtf not installed")
 
         try:
             from textxtract.handlers.html import HTMLHandler

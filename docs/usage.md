@@ -87,7 +87,7 @@ text = await extractor.extract(file_bytes, "document.pdf")
 | .doc      | [doc]                | antiword        |
 | .txt      |                      | stdlib          |
 | .md       | [md]                 | markdown        |
-| .rtf      | [rtf]                | pyrtf-ng        |
+| .rtf      | [rtf]                | striprtf        |
 | .html/.htm| [html]               | beautifulsoup4  |
 | .csv      |                      | stdlib          |
 | .json     |                      | stdlib          |

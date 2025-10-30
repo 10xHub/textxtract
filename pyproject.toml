@@ -24,7 +24,7 @@ pdf = ["pymupdf"]
 docx = ["python-docx"]
 doc = ["antiword"]
 md = ["markdown"]
-rtf = ["pyrtf-ng"]
+rtf = ["striprtf"]
 html = ["beautifulsoup4", "lxml"]
 xml = ["lxml"]
 all = [
@@ -32,7 +32,7 @@ all = [
     "python-docx",
     "antiword",
     "markdown",
-    "pyrtf-ng",
+    "striprtf",
     "beautifulsoup4",
     "lxml"
 ]
