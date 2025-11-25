@@ -12,7 +12,14 @@ authors = [
 ]
 readme = "README.md"
 requires-python = ">=3.9"
-dependencies = []
+dependencies = [
+    "pymupdf==1.25.4",
+    "python-docx",
+    "markdown",
+    "striprtf",
+    "beautifulsoup4",
+    "lxml"
+]
 
 [project.urls]
 Homepage = "https://10xhub.github.io/textxtract/"
@@ -20,7 +27,7 @@ Documentation = "https://10xhub.github.io/textxtract/"
 Source = "https://github.com/10xhub/textxtract"
 
 [project.optional-dependencies]
-pdf = ["pymupdf"]
+pdf = ["pymupdf==1.25.4"]
 docx = ["python-docx"]
 doc = ["antiword"]
 md = ["markdown"]
@@ -28,7 +35,7 @@ rtf = ["striprtf"]
 html = ["beautifulsoup4", "lxml"]
 xml = ["lxml"]
 all = [
-    "pymupdf",
+    "pymupdf==1.25.4",
     "python-docx",
     "antiword",
     "markdown",
